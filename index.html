@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROYECTO O.D.I.S.</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo_odis.png"> 
+</head>
+<body>
+
+    <div class="background-container">
+        <button id="openModalBtn" class="odis-button">
+            PROYECTO O.D.I.S
+        </button>
+    </div>
+
+    <div id="projectModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            
+            <div class="modal-header">
+                <img src="image_08872e.png" alt="Logo IES" class="logo-ies">
+                <h2>PROYECTO O.D.I.S</h2>
+            </div>
+
+            <p class="intro-text">
+                Bienvenido a PROYECTO O.D.I.S, una iniciativa de emprendimiento y colaboración para financiar nuestro viaje de estudios. Hemos organizado cinco proyectos creativos y colaborativos, planificados desde **diciembre de 2025 hasta mayo de 2026**. ¡Explora nuestra línea de tiempo interactiva para conocer cada proyecto!
+            </p>
+
+            <div class="timeline-container">
+                <div class="timeline">
+                    <div class="timeline-event" data-project="agendas" data-date="Diciembre 2025" style="--order: 1;">
+                        <span class="event-icon">📒</span>
+                        <p class="event-title">Agendas o libretas</p>
+                    </div>
+                    
+                    <div class="timeline-event" data-project="tarjetas" data-date="Enero 2026" style="--order: 2;">
+                        <span class="event-icon">🗂️</span> 
+                        <p class="event-title">Tarjetas para encargados</p>
+                    </div>
+
+                    <div class="timeline-event" data-project="marcapaginas" data-date="Febrero 2026" style="--order: 3;">
+                        <span class="event-icon">🍃</span>
+                        <p class="event-title">Marcapáginas reciclados</p>
+                    </div>
+                    
+                    <div class="timeline-event" data-project="puesto-tematico" data-date="Marzo 2026" style="--order: 4;">
+                         <span class="event-icon">🎪</span> 
+                        <p class="event-title">Puesto de venta temático</p>
+                    </div>
+                    
+                    <div class="timeline-event" data-project="llaveros-qr" data-date="Abril/Mayo 2026" style="--order: 5;">
+                        <span class="event-icon">🔑</span>
+                        <p class="event-title">Llaveros QR personalizados</p>
+                    </div>
+                </div>
+
+                <div class="timeline-bar"></div>
+            </div>
+
+            <div id="project-info-box" class="info-box">
+                <h3 id="info-title">Haz clic en un proyecto para ver los detalles.</h3>
+                <p id="info-difficulty">Dificultad:</p>
+                <p id="info-time">Tiempo de implementación:</p>
+                <p id="info-materials">Materiales:</p>
+                <p id="info-note">Nota:</p>
+                <p id="info-score">Puntuación final:</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

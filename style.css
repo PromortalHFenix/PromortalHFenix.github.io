@@ -1,0 +1,331 @@
+:root {
+    --green-main: #38761d; /* Verde oscuro del logo */
+    --green-neon: #6aa84f; /* Verde neón para el efecto */
+    --shadow-neon: 0 0 5px var(--green-neon), 0 0 10px var(--green-neon);
+    --bg-dark: rgba(20, 20, 20, 0.9); /* Fondo oscuro semitransparente para la modal */
+}
+
+/* Estilos Globales y de Cuerpo */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    /* MEJORA: Permite el scroll vertical en toda la página */
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+
+/* ------------------- FONDO Y ENTRADA ------------------- */
+
+.background-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Usando la imagen del IES y aplicándole difuminado (blur) */
+    background-image: url('image_086924.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* Difuminado de la imagen de fondo */
+    transition: filter 0.5s ease-in-out;
+    position: fixed; /* Mantiene el fondo fijo al hacer scroll */
+    top: 0;
+    left: 0;
+    z-index: 1; 
+}
+
+/* Botón de acceso "PROYECTO O.D.I.S" */
+.odis-button {
+    position: fixed; /* Fijo sobre el fondo */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado */
+    padding: 15px 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--green-neon);
+    background-color: var(--bg-dark);
+    border: 3px solid var(--green-neon);
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: var(--shadow-neon); /* Efecto Neón Verde */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    z-index: 100; /* Z-index alto para que esté por encima del fondo */
+    /* ASEGURAR QUE NO HAYA DIFUMINADO */
+    filter: none;
+}
+
+.odis-button:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    background-color: rgba(56, 118, 29, 0.2); 
+    box-shadow: var(--shadow-neon), 0 0 20px var(--green-neon);
+}
+
+
+/* ------------------- VENTANA MODAL ------------------- */
+
+.modal-overlay {
+    display: none; /* Oculto por defecto en JS */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Oscurece el fondo */
+    z-index: 1000;
+    backdrop-filter: blur(2px); /* Añade un poco de blur al overlay */
+    animation: fadeIn 0.5s ease-out;
+    /* Permitir scroll en el overlay si el contenido de la modal es muy largo */
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: var(--bg-dark);
+    color: #f0f0f0;
+    width: 90%;
+    max-width: 1000px;
+    /* Ajustado para que el scroll del overlay funcione correctamente */
+    margin: 5% auto; 
+    padding: 30px;
+    border-radius: 20px;
+    border: 3px solid var(--green-neon);
+    box-shadow: var(--shadow-neon), 0 0 20px 5px rgba(0, 0, 0, 0.5);
+    position: relative;
+    /* Efecto de ventana que aparece */
+    transform: translateY(-50px);
+    opacity: 0;
+    animation: slideIn 0.5s forwards;
+}
+
+/* Animación de entrada de la ventana */
+@keyframes slideIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: var(--green-neon);
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+    line-height: 1;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--green-neon);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.logo-ies {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.modal-header h2 {
+    color: var(--green-neon);
+    font-size: 2em;
+    text-shadow: var(--shadow-neon);
+    margin: 0;
+}
+
+.intro-text {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    padding: 10px;
+    border-left: 5px solid var(--green-main);
+}
+
+/* ------------------- LÍNEA DE TIEMPO ------------------- */
+
+.timeline-container {
+    position: relative;
+    padding: 40px 0;
+}
+
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 20px 0;
+    z-index: 10;
+}
+
+.timeline-bar {
+    position: absolute;
+    top: 50%; /* Centrado verticalmente */
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    background: var(--green-neon);
+    box-shadow: var(--shadow-neon);
+    z-index: 5;
+    transform: translateY(-50%);
+    /* Animación de la barra */
+    animation: expandBar 1s forwards;
+    width: 0%;
+}
+
+@keyframes expandBar {
+    to {
+        width: calc(100% - 20px);
+    }
+}
+
+.timeline-event {
+    position: relative;
+    width: 15%; /* Distribución equitativa de los 5 puntos */
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    /* Efecto de entrada individual */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards calc(0.5s + var(--order) * 0.2s);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timeline-event:hover {
+    transform: translateY(-5px);
+    color: #fff;
+}
+
+.event-icon {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 5px;
+    line-height: 1;
+    /* Círculo de neón para el punto de la línea de tiempo */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-dark);
+    border: 3px solid var(--green-neon);
+    box-shadow: var(--shadow-neon);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px;
+    transition: background-color 0.3s;
+}
+
+.timeline-event.active .event-icon,
+.timeline-event:hover .event-icon {
+    background-color: var(--green-main);
+    box-shadow: var(--shadow-neon), 0 0 15px var(--green-neon);
+}
+
+.event-title {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.timeline-event.active .event-title,
+.timeline-event:hover .event-title {
+    color: #fff;
+    text-shadow: 0 0 2px var(--green-neon);
+}
+
+/* ------------------- CAJA DE INFORMACIÓN ------------------- */
+
+.info-box {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid var(--green-main);
+    border-radius: 10px;
+    background-color: rgba(30, 30, 30, 0.8);
+    transition: all 0.5s ease;
+    min-height: 150px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.info-box h3 {
+    color: var(--green-neon);
+    border-bottom: 2px dashed var(--green-main);
+    padding-bottom: 10px;
+    margin-top: 0;
+    text-shadow: 0 0 3px var(--green-neon);
+}
+
+.info-box p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    .timeline {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        margin-left: 20px;
+    }
+
+    .timeline-bar {
+        left: 30px;
+        height: calc(100% - 40px);
+        width: 3px;
+        top: 20px;
+    }
+    
+    @keyframes expandBar {
+        to {
+            height: calc(100% - 40px);
+            width: 3px;
+        }
+    }
+
+    .timeline-event {
+        width: 100%;
+        text-align: left;
+        padding: 10px 0;
+        transform: translateX(0);
+        margin-left: -20px;
+    }
+
+    .event-icon {
+        margin: 0 15px 0 0;
+        display: inline-flex;
+        vertical-align: middle;
+    }
+
+    .event-title {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
