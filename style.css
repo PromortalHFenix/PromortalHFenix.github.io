@@ -27,7 +27,7 @@ body {
     background-image: url('image_086924.jpg');
     background-size: cover;
     background-position: center;
-    filter: blur(5px); /* Difuminado de la imagen de fondo */
+    filter: blur(0px); /* Difuminado de la imagen de fondo */
     transition: filter 0.5s ease-in-out;
     position: fixed; /* Mantiene el fondo fijo al hacer scroll */
     top: 0;
@@ -53,7 +53,7 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     z-index: 100; /* Z-index alto para que esté por encima del fondo */
     /* ASEGURAR QUE NO HAYA DIFUMINADO */
-    filter: none;
+    filter: blur(0px);
 }
 
 .odis-button:hover {
@@ -328,4 +328,5 @@ body {
         display: inline-block;
         vertical-align: middle;
     }
+
 }
