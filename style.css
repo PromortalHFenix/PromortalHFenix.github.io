@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;                                    /* (at que el boton verde del centro nose vea borroso) */
+    background-color: #f4f4f4;
     overflow-y: auto; 
     overflow-x: hidden;
 }
@@ -243,3 +243,4 @@ body {
 
 .timeline-event.active .event-title,
 .timeline-event:hover .
+
