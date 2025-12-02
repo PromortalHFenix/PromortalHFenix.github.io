@@ -10,6 +10,7 @@ body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
+    /* MEJORA: Permite el scroll vertical en toda la página */
     overflow-y: auto; 
     overflow-x: hidden;
 }
@@ -26,7 +27,7 @@ body {
     background-image: url('image_086924.jpg');
     background-size: cover;
     background-position: center;
-    filter: none; /* Difuminado de la imagen de fondo */
+    filter: blur(5px); /* Difuminado de la imagen de fondo */
     transition: filter 0.5s ease-in-out;
     position: fixed; /* Mantiene el fondo fijo al hacer scroll */
     top: 0;
@@ -51,7 +52,8 @@ body {
     box-shadow: var(--shadow-neon); /* Efecto Neón Verde */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     z-index: 100; /* Z-index alto para que esté por encima del fondo */
-    filter: blur(0px);
+    /* ASEGURAR QUE NO HAYA DIFUMINADO */
+    filter: none;
 }
 
 .odis-button:hover {
@@ -74,6 +76,7 @@ body {
     z-index: 1000;
     backdrop-filter: blur(2px); /* Añade un poco de blur al overlay */
     animation: fadeIn 0.5s ease-out;
+    /* Permitir scroll en el overlay si el contenido de la modal es muy largo */
     overflow-y: auto;
 }
 
@@ -82,17 +85,20 @@ body {
     color: #f0f0f0;
     width: 90%;
     max-width: 1000px;
+    /* Ajustado para que el scroll del overlay funcione correctamente */
     margin: 5% auto; 
     padding: 30px;
     border-radius: 20px;
     border: 3px solid var(--green-neon);
     box-shadow: var(--shadow-neon), 0 0 20px 5px rgba(0, 0, 0, 0.5);
     position: relative;
+    /* Efecto de ventana que aparece */
     transform: translateY(-50px);
     opacity: 0;
     animation: slideIn 0.5s forwards;
 }
 
+/* Animación de entrada de la ventana */
 @keyframes slideIn {
     to {
         transform: translateY(0);
@@ -169,7 +175,7 @@ body {
 
 .timeline-bar {
     position: absolute;
-    top: 50%;
+    top: 50%; /* Centrado verticalmente */
     left: 10px;
     right: 10px;
     height: 3px;
@@ -177,6 +183,7 @@ body {
     box-shadow: var(--shadow-neon);
     z-index: 5;
     transform: translateY(-50%);
+    /* Animación de la barra */
     animation: expandBar 1s forwards;
     width: 0%;
 }
@@ -189,10 +196,11 @@ body {
 
 .timeline-event {
     position: relative;
-    width: 15%;
+    width: 15%; /* Distribución equitativa de los 5 puntos */
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
+    /* Efecto de entrada individual */
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s forwards calc(0.5s + var(--order) * 0.2s);
@@ -215,6 +223,7 @@ body {
     display: block;
     margin-bottom: 5px;
     line-height: 1;
+    /* Círculo de neón para el punto de la línea de tiempo */
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -242,5 +251,81 @@ body {
 }
 
 .timeline-event.active .event-title,
-.timeline-event:hover .
+.timeline-event:hover .event-title {
+    color: #fff;
+    text-shadow: 0 0 2px var(--green-neon);
+}
 
+/* ------------------- CAJA DE INFORMACIÓN ------------------- */
+
+.info-box {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid var(--green-main);
+    border-radius: 10px;
+    background-color: rgba(30, 30, 30, 0.8);
+    transition: all 0.5s ease;
+    min-height: 150px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.info-box h3 {
+    color: var(--green-neon);
+    border-bottom: 2px dashed var(--green-main);
+    padding-bottom: 10px;
+    margin-top: 0;
+    text-shadow: 0 0 3px var(--green-neon);
+}
+
+.info-box p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    .timeline {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        margin-left: 20px;
+    }
+
+    .timeline-bar {
+        left: 30px;
+        height: calc(100% - 40px);
+        width: 3px;
+        top: 20px;
+    }
+    
+    @keyframes expandBar {
+        to {
+            height: calc(100% - 40px);
+            width: 3px;
+        }
+    }
+
+    .timeline-event {
+        width: 100%;
+        text-align: left;
+        padding: 10px 0;
+        transform: translateX(0);
+        margin-left: -20px;
+    }
+
+    .event-icon {
+        margin: 0 15px 0 0;
+        display: inline-flex;
+        vertical-align: middle;
+    }
+
+    .event-title {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
