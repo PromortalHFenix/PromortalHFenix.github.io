@@ -27,7 +27,7 @@ body {
     background-image: url('image_086924.jpg');
     background-size: cover;
     background-position: center;
-    filter: blur(0px); /* Difuminado de la imagen de fondo */
+    filter: none; /* Difuminado de la imagen de fondo */
     transition: filter 0.5s ease-in-out;
     position: fixed; /* Mantiene el fondo fijo al hacer scroll */
     top: 0;
@@ -330,3 +330,4 @@ body {
     }
 
 }
+
