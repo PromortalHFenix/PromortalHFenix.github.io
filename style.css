@@ -1,49 +1,46 @@
 :root {
-    --green-main: #38761d; 
-    --green-neon: #6aa84f; 
+    --green-main: #38761d; /* Verde oscuro del logo */
+    --green-neon: #6aa84f; /* Verde neón para el efecto */
     --shadow-neon: 0 0 5px var(--green-neon), 0 0 10px var(--green-neon);
-    --bg-dark: rgba(20, 20, 20, 0.9);
+    --bg-dark: rgba(20, 20, 20, 0.9); /* Fondo oscuro semitransparente para la modal */
 }
 
-/* Estilos Globales */
+/* Estilos Globales y de Cuerpo */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
+    /* MEJORA: Permite el scroll vertical en toda la página */
     overflow-y: auto; 
     overflow-x: hidden;
 }
 
-/* ------------------- FONDO SIN AFECTAR AL BOTÓN ------------------- */
+/* ------------------- FONDO Y ENTRADA ------------------- */
 
 .background-container {
     height: 100vh;
     width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    overflow: hidden;
-}
-
-/* El blur solo se aplica a esta capa */
-.background-container::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Usando la imagen del IES y aplicándole difuminado (blur) */
     background-image: url('image_086924.jpg');
     background-size: cover;
     background-position: center;
-    filter: blur(6px); /* <- AJUSTA EL NIVEL DE BLUR AQUÍ */
-    transform: scale(1.1); /* Evita bordes feos */
+    filter: none; /* Difuminado de la imagen de fondo */
+    transition: filter 0.5s ease-in-out;
+    position: fixed; /* Mantiene el fondo fijo al hacer scroll */
+    top: 0;
+    left: 0;
+    z-index: 1; 
 }
 
-/* Botón ODIS, ya NO se verá borroso */
+/* Botón de acceso "PROYECTO O.D.I.S" */
 .odis-button {
-    position: fixed;
+    position: fixed; /* Fijo sobre el fondo */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* Centrado */
     padding: 15px 30px;
     font-size: 1.5em;
     font-weight: bold;
@@ -52,13 +49,11 @@ body {
     border: 3px solid var(--green-neon);
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: var(--shadow-neon);
+    box-shadow: var(--shadow-neon); /* Efecto Neón Verde */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    z-index: 100;
-    
-    /* Asegura 0 blur siempre */
-    filter: none !important;
-    backdrop-filter: none !important;
+    z-index: 100; /* Z-index alto para que esté por encima del fondo */
+    /* ASEGURAR QUE NO HAYA DIFUMINADO */
+    filter: blur(0px);
 }
 
 .odis-button:hover {
@@ -67,19 +62,21 @@ body {
     box-shadow: var(--shadow-neon), 0 0 20px var(--green-neon);
 }
 
-/* ------------------- MODAL ------------------- */
+
+/* ------------------- VENTANA MODAL ------------------- */
 
 .modal-overlay {
-    display: none;
+    display: none; /* Oculto por defecto en JS */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6); /* Oscurece el fondo */
     z-index: 1000;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px); /* Añade un poco de blur al overlay */
     animation: fadeIn 0.5s ease-out;
+    /* Permitir scroll en el overlay si el contenido de la modal es muy largo */
     overflow-y: auto;
 }
 
@@ -88,28 +85,31 @@ body {
     color: #f0f0f0;
     width: 90%;
     max-width: 1000px;
-    margin: 5% auto;
+    /* Ajustado para que el scroll del overlay funcione correctamente */
+    margin: 5% auto; 
     padding: 30px;
     border-radius: 20px;
     border: 3px solid var(--green-neon);
     box-shadow: var(--shadow-neon), 0 0 20px 5px rgba(0, 0, 0, 0.5);
     position: relative;
+    /* Efecto de ventana que aparece */
     transform: translateY(-50px);
     opacity: 0;
     animation: slideIn 0.5s forwards;
 }
 
+/* Animación de entrada de la ventana */
 @keyframes slideIn {
     to {
         transform: translateY(0);
         opacity: 1;
     }
 }
-
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
 
 .close-btn {
     position: absolute;
@@ -120,6 +120,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s, transform 0.3s;
+    line-height: 1;
 }
 
 .close-btn:hover,
@@ -138,6 +139,7 @@ body {
 
 .logo-ies {
     width: 50px;
+    height: auto;
     margin-right: 15px;
 }
 
@@ -156,7 +158,7 @@ body {
     border-left: 5px solid var(--green-main);
 }
 
-/* ------------------- TIMELINE ------------------- */
+/* ------------------- LÍNEA DE TIEMPO ------------------- */
 
 .timeline-container {
     position: relative;
@@ -173,7 +175,7 @@ body {
 
 .timeline-bar {
     position: absolute;
-    top: 50%;
+    top: 50%; /* Centrado verticalmente */
     left: 10px;
     right: 10px;
     height: 3px;
@@ -181,6 +183,7 @@ body {
     box-shadow: var(--shadow-neon);
     z-index: 5;
     transform: translateY(-50%);
+    /* Animación de la barra */
     animation: expandBar 1s forwards;
     width: 0%;
 }
@@ -193,10 +196,11 @@ body {
 
 .timeline-event {
     position: relative;
-    width: 15%;
+    width: 15%; /* Distribución equitativa de los 5 puntos */
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
+    /* Efecto de entrada individual */
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s forwards calc(0.5s + var(--order) * 0.2s);
@@ -216,6 +220,10 @@ body {
 
 .event-icon {
     font-size: 2.5em;
+    display: block;
+    margin-bottom: 5px;
+    line-height: 1;
+    /* Círculo de neón para el punto de la línea de tiempo */
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -248,6 +256,8 @@ body {
     text-shadow: 0 0 2px var(--green-neon);
 }
 
+/* ------------------- CAJA DE INFORMACIÓN ------------------- */
+
 .info-box {
     margin-top: 30px;
     padding: 20px;
@@ -256,6 +266,7 @@ body {
     background-color: rgba(30, 30, 30, 0.8);
     transition: all 0.5s ease;
     min-height: 150px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .info-box h3 {
@@ -271,17 +282,17 @@ body {
     font-size: 0.95em;
 }
 
-/* ------------------- RESPONSIVE ------------------- */
-
+/* Responsividad para pantallas más pequeñas */
 @media (max-width: 768px) {
     .modal-content {
         width: 95%;
         margin: 5% auto;
     }
-
+    
     .timeline {
         flex-direction: column;
         align-items: flex-start;
+        padding: 0;
         margin-left: 20px;
     }
 
@@ -291,7 +302,7 @@ body {
         width: 3px;
         top: 20px;
     }
-
+    
     @keyframes expandBar {
         to {
             height: calc(100% - 40px);
@@ -303,15 +314,19 @@ body {
         width: 100%;
         text-align: left;
         padding: 10px 0;
+        transform: translateX(0);
         margin-left: -20px;
     }
 
     .event-icon {
         margin: 0 15px 0 0;
         display: inline-flex;
+        vertical-align: middle;
     }
 
     .event-title {
         display: inline-block;
+        vertical-align: middle;
     }
+
 }
