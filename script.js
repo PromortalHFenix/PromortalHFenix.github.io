@@ -6,7 +6,8 @@ const projectData = {
         time: "2 a 3 semanas",
         materials: "Papel, cartón, juntas y materiales variados.",
         note: "Alto coste de producción y alta competencia con productos existentes, lo que puede llevar a una baja eficiencia.",
-        score: "3/5"
+        score: "3/5",
+        members: []
     },
     "tarjetas": {
         title: "Tarjetas para los encargados",
@@ -14,7 +15,8 @@ const projectData = {
         time: "1 a 2 semanas",
         materials: "Papel, cartón, madera y materiales variados.",
         note: "Proyecto inicial muy útil para aprender a trabajar en equipo, aunque no tiene recompensa económica directa.",
-        score: "5/5"
+        score: "5/5",
+        members: []
     },
     "marcapaginas": {
         title: "Marcapáginas con panel reciclado",
@@ -22,7 +24,8 @@ const projectData = {
         time: "1 semana",
         materials: "Papel, cartón y materiales variados.",
         note: "Proyecto inicial útil para la base de otros más difíciles. El beneficio económico no es relevante, pero la utilidad es alta.",
-        score: "5/5"
+        score: "5/5",
+        members: []
     },
     "puesto-tematico": {
         title: "Puesto de venta temático",
@@ -30,7 +33,8 @@ const projectData = {
         time: "1 a 2 semanas",
         materials: "Materiales variados dependientes de la festividad (Ej: huevos de pascua).",
         note: "Uno de los mejores proyectos para recaudar fondos, con muy buenos resultados en ocasiones anteriores.",
-        score: "5/5"
+        score: "5/5",
+        members: []
     },
     "llaveros-qr": {
         title: "Llavero con código QR de cualidades",
@@ -38,7 +42,8 @@ const projectData = {
         time: "1 a 2 semanas",
         materials: "Materiales variados (impresiones, resinas, etc.).",
         note: "Idea innovadora y personalizada. Se requiere manejo de diseño y códigos QR para la producción.",
-        score: "4/5" 
+        score: "4/5",
+        members: []
     }
 };
 
@@ -54,20 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const infoMaterials = document.getElementById('info-materials');
     const infoNote = document.getElementById('info-note');
     const infoScore = document.getElementById('info-score');
-    
+
     const backgroundContainer = document.querySelector('.background-container');
 
     // --- Funcionalidad de la Ventana Modal ---
-    
+
     // Abre la modal
-    openModalBtn.onclick = function() {
+    openModalBtn.onclick = function () {
         projectModal.style.display = 'block';
         openModalBtn.style.display = 'none'; // Oculta el botón al abrir
         backgroundContainer.style.filter = 'blur(10px)'; // Aumenta el blur del fondo
     }
 
     // Cierra la modal
-    closeBtn.onclick = function() {
+    closeBtn.onclick = function () {
         projectModal.style.display = 'none';
         openModalBtn.style.display = 'block'; // Muestra el botón al cerrar
         backgroundContainer.style.filter = 'blur(5px)'; // Reduce el blur del fondo a su estado inicial
@@ -78,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Cierra la modal si se hace clic fuera del contenido de la ventana
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == projectModal) {
             projectModal.style.display = 'none';
             openModalBtn.style.display = 'block';
