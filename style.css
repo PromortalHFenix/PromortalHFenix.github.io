@@ -52,8 +52,6 @@ body {
     box-shadow: var(--shadow-neon); /* Efecto Neón Verde */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     z-index: 100; /* Z-index alto para que esté por encima del fondo */
-    /* ASEGURAR QUE NO HAYA DIFUMINADO */
-    filter: none;
 }
 
 .odis-button:hover {
